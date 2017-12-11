@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Blok Zinciri (Blockchain) Demo Uygulaması";
+}
+
+<div class="jumbotron">
+    <h1>Blok Zinciri (Blockchain) Demo Uygulaması</h1>
+    <p class="lead">
+        <a href="https://www.codevist.com" target="_blank">Codevist Bilişim Teknolojileri</a> olarak blockchain teknolojileri üzerinde çalışıyoruz. Yine yapmaya çalıştığımız bir diğer konu ise öğrendiklerimizi 
+        paylaşmak. Bu örnek çok kaba bir şekilde hash, blok blok zinciri ve dağıtık blok zinciri kavramlarını anlatmak ve gösterebilmek amacıyla kodlanmış ve <a href="https://github.com/codevist" target="_blank">Codevist Github</a> hesabı üzerinde açık kaynak olarak
+        paylaşılmıştır. 
+    </p>
+    <p class="lead">Blok zinciri (Blockchain), günümüzde oldukça popüler olan dağıtık ve değiştirilemez veri saklama yöntemidir.
+        Blockchain’i kısaca şifrelenmiş işlem takibi sağlayan bir dağıtık veri tabanı olarak tanımlayabiliriz. Blok Zincirinde veriler değiştirilemez. 
+    </p>
+    <p>
+        <a href="https://anders.com/blockchain/" target="_blank">Buradan</a> ilham alarak, .Net altyapısı ile geliştirdiğimiz bu örnekle amacımız çok basit bir şekilde blokların ve blok zincirlerinin
+        nasıl bir yapıyla oluştugunu ve birbirlerine nasıl bağlandıklarını, nonce değerinin ne işe yaradığını, nasıl hesaplandığını, zincirin ortasında bir blockta yer alan verinin değiştiğinde 
+        nasıl zincirin geri kalanını değiştirdiğini göstermek istedik. 
+    </p>
+    <h2>Zorluk Seviyesi ve Nonce Değeri</h2>
+    <p class="lead">
+        <b>Zorluk Seviyesi</b>, bir bloğun hesaplanmasındaki zorluk seviyesini gösterir. Hesaplanan hash değerinin başındaki "0" değerlerinin sayısı genel olarak o zorlugu gösterir. 
+        Bu illa 0 olmak zorunda değildir, herhangi başka bir değer olabilir. Bu örnekte zorluk seviyesini değiştirmek isterseniz web.config üzerinde
+        yer alan "DifficulityLevel" alanını değiştirebilirsiniz. Bu değeri arttırdığınızda işlemlerin zorluk değeri artacaktır. 
+    </p>
+    <p>
+        <b>Nonce değeri</b>, zorluk seviyesine uygun hash değerinin bulunmasında yapılan iterasyonu (işlem sayısı) temsil eder. Diğer bir deyişle uygun hash değerinin bulunması için kaç işlem yapıldığı ve kaçıncı işlemde bu doğru değerin 
+        bulunduğunu ifade eder. Nonce değeri numerik bir değerdir. Madencilerin maden arama (mining) işlemiyle aslında yaptıkları iş, işlem için uygun nonce değerini bulmaktır. 
+    </p>
+</div>
+
+<div class="row" style="min-height: 400px">
+    <div class="col-md-4">
+        <h2>Hash Hesaplama</h2>
+        <p>
+            Hash, verinin özetidir, parmak izidir. Tek yönlü bir dönüşüm söz konusudur yani hashlenmiş veriden asıl veriye dönüş olmaz. Aynı verinin hash'i de aynıdır. Çeşitli hash hesaplama algoritmaları 
+            mevcuttur. Biz bu örneklerde SHA-256 Hash hesaplama algoritmasını kullanarak ilerledik. 
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Hash","Home")">Hash Hesaplama</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Blok Hesaplama</h2>
+        <p>
+            Bir blok, içerisinde çeşitli verileri, işlemleri (transaction) barındıran veri kümesidir. Bir blok temel olarak, blok id, nonce değeri, veri, hash ve önceki bloğun hash'ini barındırır. 
+            <br/>
+            Bir blok zincirinde ilk bloğa genesis (Doğuş) bloğu adı verilir ve bu bloğun kendinden önce blok olmadığı ve prevHash (Önceki Hash) değerinin "00000000000000...."  dan oluştuğu varsayılır.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Block","Home")">Blok Hesaplama</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Blok Zinciri</h2>
+        <p>
+            Birden fazla bloğun bir araya gelmesiyle ve bu blokların birbirlerine "bağlanmasıyla" oluşan veri zinciridir. Blokların birbirine bağlanmasından kasıt bir önceki blogunun hash'inin o blogun hash'i hesaplanırken 
+            kullanılmasıdır. 
+            <br/>
+            Bu sayede bir önceki blogun içinde bir verinin en ufak parçası bile değişse o blogun hash değeri bozulacağı için kendinden sonra gelen zincirlerdeki tüm hash değerleri bozulur ve zincir kopar. 
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("BlockChain","Home")">Blok Zinciri</a></p>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@using System.Configuration
+@model codevist.Blockchain.Demo.Models.BlockModel
+@{
+    ViewBag.Title = "BlockChain";
+}
+
+
+<h1>Dağıtık Blok Zinciri</h1>
+@section Styles {
+    <link href="~/Content/bootstrap-horizon.css" rel="stylesheet" />
+}
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div id="blockBody"> 
+        @Html.Partial("/Views/Home/PartialViewDistributedBlockChainPeerA.cshtml")
+        @Html.Partial("/Views/Home/PartialViewDistributedBlockChainPeerB.cshtml")
+        @Html.Partial("/Views/Home/PartialViewDistributedBlockChainPeerC.cshtml")
+        <br/>
+    </div>
+</form>
+
+
+@section scripts
+{
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/jquery.blockui.min.js"></script>
+    <script src="~/Scripts/sha256.js"></script>
+}
+
+
+
+

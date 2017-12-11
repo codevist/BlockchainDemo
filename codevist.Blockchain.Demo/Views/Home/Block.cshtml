@@ -1,0 +1,120 @@
+﻿@using System.Configuration
+@model codevist.Blockchain.Demo.Models.BlockModel
+@{
+    ViewBag.Title = "Hash";
+}
+
+<h1>Block Hesaplama</h1>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div class="well" id="blockBody">
+        <div class="container">
+            <div class="form-horizontal">
+                <div class="well block">
+                    <div class="form-group"> 
+                        <label class="col-sm-2 control-label">Blok Id:</label>
+                        <div class="col-sm-10">  
+                            <div class="input-group">
+                                <span class="input-group-addon">#</span>
+                                <input type="text" value="1" class="form-control" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Nonce Değeri:</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Nonce, new { @class = "form-control", id = "blockNonce", @Value = "88484", @onkeyup = "updateHash()" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Veri:</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(m => m.Data, new { @class = "form-control", @rows = 6, id = "blockData", @onkeyup = "updateHash()" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Hash:</label>
+                        <div class="col-sm-10">
+                            <input id="blockHash" value="0000a456e7b5a5eb059e721fb431436883143101275c4077f83fe70298f5623d" type="text" disabled="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"></label>
+                        <div class="col-sm-10">
+                            <button id="calculateHash" type="button" class="btn green">Mine (Hesapla)</button>
+                        </div>
+
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+<script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/jquery.blockui.min.js"></script>
+    <script src="~/Scripts/sha256.js"></script>>
+    <script>
+        $(document).ready(function () {
+          
+            $(".block").addClass("well-success");
+            $(".block").removeClass("well-warning");
+        });
+        function blockUI() {
+            App.blockUI({
+                target: '#blockBody',
+                animate: true
+            });
+            return true;
+        };
+
+        $('#calculateHash').click(function () {
+            blockUI();
+            var formData = {
+                Data: $('#blockData').val()
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ReturnBlockCalculatedHashAndNonceValue", "Home")',
+                    data: formData,
+                    datatype: "JSON"
+                })
+                .success(function (data) {
+                    $('#blockHash').val(data.Hash);
+                    $('#blockNonce').val(data.Nonce);
+                    App.unblockUI('#blockBody');
+                    $(".block").addClass("well-success");
+                    $(".block").removeClass("well-warning");
+                })
+                .error(function(xhr, status) {
+                    alert('Hata Oluştu');
+                    App.unblockUI('#blockBody');
+
+                });
+        });
+        var hash;
+        var difficultyLevel=@ConfigurationManager.AppSettings["DifficultyLevel"];
+        var zeros = "";
+        for (i = 0; i < difficultyLevel; i++) {
+            zeros += "0";
+        }
+        
+        function updateHash() {
+            hash = Sha256.hash($('#blockData').val() + $('#blockNonce').val());
+            if (hash.substring(0, difficultyLevel) === zeros) {
+                $(".block").addClass("well-success");
+                $(".block").removeClass("well-warning");
+            }
+            else {
+                $(".block").removeClass("well-success");
+                $(".block").addClass("well-warning");
+            }
+            $('#blockHash').val(hash);
+        }
+    </script>
+}

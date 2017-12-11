@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Hash Hesaplama";
+}
+
+<h1>Hash Hesaplama</h1>
+<div class="well">
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Veri:</label>
+                <div class="col-sm-10">
+                    <textarea rows="10"  class="form-control" id="message"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Hash:</label>
+                <div class="col-sm-10">
+                    <input id="hash" type="text" disabled="" class="form-control">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/sha256.js"></script>
+@section scripts
+{
+    <script>
+        var hash;
+        $(document).ready(function() {
+            hash = Sha256.hash();
+            $('#hash').val(hash);
+        });
+
+        $("#message").on('keyup ',
+            function() {
+                 hash = Sha256.hash(this.value);
+                $('#hash').val(hash);
+            });
+    </script>
+}

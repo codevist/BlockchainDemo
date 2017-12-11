@@ -1,0 +1,30 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+.well-success {
+    
+    background:rgb(223, 240, 216)
+}
+.well-warning {
+  background: rgb(250, 220, 220)
+}
+
+
+.footer { position: fixed; bottom: 0; height: 30px; background: #000; width: 100%; text-align: center; color : #fff;}
+.float-right {
+    float: right !important;
+}

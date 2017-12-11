@@ -1,0 +1,413 @@
+﻿@using System.Configuration
+@model codevist.Blockchain.Demo.Models.BlockModel
+@{
+    ViewBag.Title = "BlockChain";
+}
+
+<h3>Peer C</h3>
+ <div class="row row-horizon">
+            <div class="col-md-7">
+                <div class="form-horizontal">
+
+                    <div class="well blockChainPeerC_1">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Blok Id:</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#</span>
+                                    <input type="text" value="1" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nonce Değeri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nonce, new { @class = "form-control", id = "blockChainNoncePeerC_1", @onkeyup = "updatePeerCHash(1)", @Value = "20303" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Veri:</label>
+                            <div class="col-sm-10">
+
+                                @Html.TextAreaFor(m => m.Data, new { @class = "form-control ", @rows = 6, id = "blockChainDataPeerC_1", @onkeyup = "updatePeerCHash(1)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Önceki Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainPrevPeerC_1" type="text" value="0000000000000000000000000000000000000000000000000000000000000000" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainHashPeerC_1" value="000089fdc74b16a6ba1cd6b1b45ebb2090debbb7487cc8f354a382f9c4f2b9fd" type="text" disabled="disabled" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                                <button id="blockChainPeerCCalculateHash1" type="button" class="btn ">Mine (Hesapla)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-horizontal">
+                    <div class="well blockChainPeerC_2">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Blok Id:</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#</span>
+                                    <input type="text" value="2" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nonce Değeri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nonce, new { @class = "form-control", id = "blockChainNoncePeerC_2", @onkeyup = "updatePeerCHash(2)", @Value = "6695" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Veri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Data, new { @class = "form-control", @rows = 6, id = "blockChainDataPeerC_2", @onkeyup = "updatePeerCHash(2)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Önceki Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainPrevPeerC_2" type="text" value="000089fdc74b16a6ba1cd6b1b45ebb2090debbb7487cc8f354a382f9c4f2b9fd" disabled="disabled" class="form-control blockChain2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainHashPeerC_2" type="text" value="0000e0a7933f8ec2e2e0f5aaf4c503c4ade8fe412a0659b7a68ac05aee58fac6" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                                <button id="blockChainPeerCCalculateHash2" type="button" class="btn green">Mine (Hesapla)</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-horizontal">
+                    <div class="well blockChainPeerC_3">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Blok Id:</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#</span>
+                                    <input type="text" value="3" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nonce Değeri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nonce, new { @class = "form-control", id = "blockChainNoncePeerC_3", @onkeyup = "updatePeerCHash(3)", @Value = "73670" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Veri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Data, new { @class = "form-control", @rows = 6, id = "blockChainDataPeerC_3", @onkeyup = "updatePeerCHash(3)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Önceki Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainPrevPeerC_3" type="text" value="0000e0a7933f8ec2e2e0f5aaf4c503c4ade8fe412a0659b7a68ac05aee58fac6" disabled="disabled" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainHashPeerC_3" type="text" value="00003d9be52618e2ee92fd9fe155334b1b681c7613afb4df45031749f302c458" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                                <button id="blockChainPeerCCalculateHash3" type="button" class="btn green">Mine (Hesapla)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-horizontal">
+                    <div class="well blockChainPeerC_4">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Blok Id:</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#</span>
+                                    <input type="text" value="4" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nonce Değeri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nonce, new { @class = "form-control", id = "blockChainNoncePeerC_4", @onkeyup = "updatePeerCHash(4)", @Value = "118819" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Veri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Data, new { @class = "form-control", @rows = 6, id = "blockChainDataPeerC_4", @onkeyup = "updatePeerCHash(4)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Önceki Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainPrevPeerC_4" type="text" value="00003d9be52618e2ee92fd9fe155334b1b681c7613afb4df45031749f302c458" disabled="disabled" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainHashPeerC_4" type="text" value="00007030233bfd95a943983db8e9bae79c43df5218e7d799718477637b4f6866" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                                <button id="blockChainPeerCCalculateHash4" type="button" class="btn green">Mine (Hesapla)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-horizontal">
+                    <div class="well blockChainPeerC_5">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Blok Id:</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#</span>
+                                    <input type="text" value="5" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nonce Değeri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nonce, new { @class = "form-control", id = "blockChainNoncePeerC_5", @onkeyup = "updatePeerCHash(5)", @Value = "106009" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Veri:</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Data, new { @class = "form-control", @rows = 6, id = "blockChainDataPeerC_5", @onkeyup = "updatePeerCHash(5)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Önceki Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainPrevPeerC_5" value="00007030233bfd95a943983db8e9bae79c43df5218e7d799718477637b4f6866" type="text" disabled="disabled" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Hash:</label>
+                            <div class="col-sm-10">
+                                <input id="blockChainHashPeerC_5" value="0000968d9cfda2cac612baa6cde2a82bf32af9a37b7fa1b713a2ef05d0dc7756" type="text" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                                <button id="blockChainPeerCCalculateHash5" type="button" class="btn green">Mine (Hesapla)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+ </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+            for (var i = 0; i < 6; i++) {
+                $(".blockChainPeerC_"+i).addClass("well-success");            
+            }
+        });
+
+        function blockUI() {
+            App.blockUI({
+                target: '#blockBody',
+                animate: true
+            });
+            return true;
+        };
+        $('#blockChainPeerCCalculateHash1').click(function () {
+            blockUI();
+            var formData = {
+                Data: $('#blockChainDataPeerC_1').val(),
+                Prev: $('#blockChainPrevPeerC_1').val()
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ReturnBlockChainCalculatedHashNonceAndPrev", "Home")',
+                    data: formData,
+                    datatype: "JSON"
+                })
+                .success(function (data) {
+                    $('#blockChainHashPeerC_1').val(data.Hash);
+                    $('#blockChainPrevPeerC_2').val(data.Hash);
+                    $('#blockChainNoncePeerC_1').val(data.Nonce);
+                    App.unblockUI('#blockBody');
+                    $(".blockChainPeerC_1").addClass("well-success");
+                    $(".blockChainPeerC_1").removeClass("well-warning");
+
+                })
+                .error(function(xhr, status) {
+                    alert('Hata Oluştu');
+                    App.unblockUI('#blockBody');
+
+                });
+        });
+
+        $('#blockChainPeerCCalculateHash2').click(function () {
+            blockUI();
+            var formData = {
+                Data: $('#blockChainDataPeerC_2').val(),
+                Prev: $('#blockChainPrevPeerC_2').val()
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ReturnBlockChainCalculatedHashNonceAndPrev", "Home")',
+                    data: formData,
+                    datatype: "JSON"
+                })
+                .success(function (data) {
+                    $('#blockChainHashPeerC_2').val(data.Hash);
+                    $('#blockChainPrevPeerC_3').val(data.Hash);
+                    $('#blockChainNoncePeerC_2').val(data.Nonce);
+                    App.unblockUI('#blockBody');
+                    $(".blockChainPeerC_2").addClass("well-success");
+                    $(".blockChainPeerC_2").removeClass("well-warning");
+                })
+                .error(function (xhr, status) {
+                    alert('Hata Oluştu');
+                    App.unblockUI('#blockBody');
+
+                });
+        });
+        $('#blockChainPeerCCalculateHash3').click(function () {
+            blockUI();
+            var formData = {
+                Data: $('#blockChainDataPeerC_3').val(),
+                Prev: $('#blockChainPrevPeerC_3').val()
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ReturnBlockChainCalculatedHashNonceAndPrev", "Home")',
+                    data: formData,
+                    datatype: "JSON"
+                })
+                .success(function (data) {
+                    $('#blockChainHashPeerC_3').val(data.Hash);
+                    $('#blockChainPrevPeerC_4').val(data.Hash);
+                    $('#blockChainNoncePeerC_3').val(data.Nonce);
+                    App.unblockUI('#blockBody');
+                    $(".blockChainPeerC_3").addClass("well-success");
+                    $(".blockChainPeerC_3").removeClass("well-warning");
+                })
+                .error(function (xhr, status) {
+                    alert('Hata Oluştu');
+                    App.unblockUI('#blockBody');
+
+                });
+        });
+        $('#blockChainPeerCCalculateHash4').click(function () {
+            blockUI();
+            var formData = {
+                Data: $('#blockChainDataPeerC_4').val(),
+                Prev: $('#blockChainPrevPeerC_4').val()
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ReturnBlockChainCalculatedHashNonceAndPrev", "Home")',
+                    data: formData,
+                    datatype: "JSON"
+                })
+                .success(function (data) {
+                    $('#blockChainHashPeerC_4').val(data.Hash);
+                    $('#blockChainPrevPeerC_5').val(data.Hash);
+                    $('#blockChainNoncePeerC_4').val(data.Nonce);
+                    App.unblockUI('#blockBody');
+                    $(".blockChainPeerC_4").addClass("well-success");
+                    $(".blockChainPeerC_4").removeClass("well-warning");
+                }).error(function (xhr, status) {
+                    alert('Hata Oluştu');
+                    App.unblockUI('#blockBody');
+                });
+        });
+        $('#blockChainPeerCCalculateHash5').click(function () {
+            blockUI();
+            var formData = {
+                Data: $('#blockChainDataPeerC_5').val(),
+                Prev: $('#blockChainPrevPeerC_5').val()
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ReturnBlockChainCalculatedHashNonceAndPrev", "Home")',
+                    data: formData,
+                    datatype: "JSON"
+                })
+                .success(function (data) {
+                    $('#blockChainHashPeerC_5').val(data.Hash);
+                    $('#blockChainNoncePeerC_5').val(data.Nonce);
+                    App.unblockUI('#blockBody');
+                    $(".blockChainPeerC_5").addClass("well-success");
+                    $(".blockChainPeerC_5").removeClass("well-warning");
+                })
+                .error(function (xhr, status) {
+                    alert('Hata Oluştu');
+                    App.unblockUI('#blockBody');
+                });
+        });
+        var hash;
+        var difficultyLevel=@ConfigurationManager.AppSettings["DifficultyLevel"];
+        var zeros = "";
+        for (i = 0; i < difficultyLevel; i++) {
+            zeros += "0";
+        }
+
+        function updatePeerCHash(updateId) {
+           
+            hash = Sha256.hash($('#blockChainDataPeerC_' + updateId).val() + $('#blockChainPrevPeerC_' + updateId).val() + $('#blockChainNoncePeerC_' + updateId).val());
+
+            if (hash.substring(0, difficultyLevel) === zeros) {
+                $(".blockChainPeerC_" + updateId).addClass("well-success");
+                $(".blockChainPeerC_" + updateId).removeClass("well-warning");
+            }
+            else {
+                $(".blockChainPeerC_" + updateId).removeClass("well-success");
+                $(".blockChainPeerC_" + updateId).addClass("well-warning");
+            }
+            $('#blockChainHashPeerC_' + updateId).val(hash);
+            $('#blockChainPrevPeerC_' + (updateId + 1)).val(hash);
+            if (updateId < 5) {
+                updatePeerCHash(updateId + 1);
+            }
+        }
+</script>
